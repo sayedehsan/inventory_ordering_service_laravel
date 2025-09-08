@@ -22,3 +22,43 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Node.js
+node_modules/
+package-lock.json
+npm-debug.log*
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+
+# Others
+.idea/
+.vscode/
+
+# Laravel
+/vendor/
+.env
+.phpunit.result.cache
+/storage/*.key
+/storage/app/public
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/testing
+/storage/framework/views
+/storage/logs
+/public/storage
+
+# Composer
+composer.lock
+
+# Misc
+*.sublime-workspace
+*.sublime-project
