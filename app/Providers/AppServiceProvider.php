@@ -1,32 +1,32 @@
 <?php
-
 namespace App\Providers;
 
-// use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Passport\Passport;
+use Laravel\Passport\Passport; // Make sure this line is here
+use Carbon\CarbonInterval;
 
-class AppServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The model to policy mappings for the application.
+     *
+     * @var array<class-string, class-string>
      */
-    public function register(): void
-    {
+    protected $policies = [
         //
-    }
+    ];
 
     /**
-     * Bootstrap any application services.
+     * Register any authentication / authorization services.
      */
     public function boot(): void
     {
+        Passport::loadKeysFrom(__DIR__.'/../secrets/oauth');
         $this->registerPolicies();
-        // if(!$this->app->routesAreCached()){
-        //     Passport::routes();
-        // }
-        Passport::tokensExpireIn(now()->addDays(10));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-    }   
+
+        Passport::tokensExpireIn(CarbonInterval::days(15));
+        Passport::refreshTokensExpireIn(CarbonInterval::days(30));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::months(6));
+    }
 }
